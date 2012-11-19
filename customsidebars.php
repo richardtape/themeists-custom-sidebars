@@ -107,6 +107,7 @@ class ThemeistsCustomSidebars
 		foreach($this->replacements as $sb_name => $replacement_info){
 			if($replacement_info){
 				list($replacement, $replacement_type, $extra_index) = $replacement_info;
+				$sb = $this->getThemeistsCustomSidebars();
 				if($this->checkAndFixSidebar($sb, $replacement, $replacement_type, $extra_index)){
 					if(sizeof($original_widgets[$replacement]) == 0){ //No widgets on custom bar, show nothing
 						$wp_registered_widgets['csemptywidget'] = $this->getEmptyWidget();
