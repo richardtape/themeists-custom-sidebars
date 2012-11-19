@@ -513,7 +513,7 @@ class ThemeistsCustomSidebars
 	function getDefaultReplacements()
 	{
 		if( $defaults = $this->options ){//get_option($this->option_modifiable) )
-			$defaults['post_type_posts'] = $defaults['defaults'];
+			$defaults['post_type_posts'] = ( isset( $defaults['defaults'] ) ) ? $defaults['defaults'] : '';
 			unset($defaults['modifiable']);
 			unset($defaults['defaults']);
 			return $defaults;
