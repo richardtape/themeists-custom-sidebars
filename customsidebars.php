@@ -46,7 +46,25 @@ class ThemeistsCustomSidebars
 		foreach($this->replaceable_sidebars as $sb)
 			$this->replacements[$sb] = FALSE;
 
+		add_filter( 'plugins_url', array( &$this, 'local_dev_symlink_plugins_url_fix' ), 10, 3 );
+
 	}/* ThemeistsCustomSidebars() */
+
+
+	/* =============================================================================== */
+
+
+	function local_dev_symlink_plugins_url_fix( $url, $path, $plugin )
+	{
+
+		// Do it only for this plugin
+		if ( strstr( $plugin, basename( __FILE__ ) ) )
+			return str_replace( dirname( __FILE__ ), '/' . basename( dirname( $plugin ) ), $url );
+
+		return $url;
+
+	}/* local_dev_symlink_plugins_url_fix() */
+
 	
 	function retrieveOptions()
 	{
@@ -419,8 +437,6 @@ class ThemeistsCustomSidebars
 			}
 			else if($_GET['p']=='edit')
 				include('views/edit.php');
-                        else if($_GET['p']=='removebanner')
-                            return $this->removeBanner();
 			else
 				include('views/settings.php');	
 				
@@ -982,18 +998,6 @@ class ThemeistsCustomSidebars
 		$cat = &get_category($catid);
 		return 1 + $this->getCategoryLevel($cat->category_parent);
 	}
-        
-        protected function removeBanner()
-	{
-            if(isset($_GET['code']) && strpos(strtolower(base64_decode(strrev(urldecode($_GET['code'])))), strtolower($_SERVER['HTTP_HOST'])) !== FALSE)
-                    $this->registerCode(urldecode($_GET['code']));
-            else if(isset($_GET['code']) && $_GET['code']=='unregistercode'){
-                    unset($this->options['code']);
-                    update_option($this->option_modifiable, $this->options);
-            }
-            
-            include 'views/removeBanner.php';
-        }
         
         protected function registerCode($code){
             if($this->options !== FALSE){

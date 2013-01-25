@@ -10,7 +10,7 @@
 <div id="col-right">
  
 	<h2 class="title"><?php _e('New Sidebar','custom-sidebars'); ?></h2>
-	<p><?php _e('When a custom sidebar is created, it is shown in the widgets page. There you will be able to configure it.', 'custom-sidebars'); ?></p>
+	<p><?php _e( 'When a custom sidebar is created, it is shown on the <code>Appearance > Widgets</code> page where you will be able to add any widgets to your newly created sidebar.', 'custom-sidebars'); ?></p>
 	<form action="themes.php?page=ThemeistsCustomSidebars" method="post">
 		<?php wp_nonce_field( 'custom-sidebars-new');?>
 		<div id="namediv" class="stuffbox">
@@ -43,11 +43,11 @@
 		
 		<div id="modifiable-sidebars">
 			<h2><?php _e('Replaceable Sidebars','custom-sidebars'); ?></h2>
-			<p><?php _e('Select the sidebars available for replacing. They will appear for replacement when a post or page is edited or created. They will also be available in the default sidebars page. You can select several sidebars by holding the SHIFT key when clicking on them.','custom-sidebars'); ?></p>
+			<p><?php _e('Please select the sidebars that you would like to mark as being replaceable. This means that you will be able to swap them for other sidebars on each page. You can select several sidebars by holding the [ctrl] key on Windows or the [cmd] key on a mac.','custom-sidebars'); ?></p>
 			<div id="msidebardiv" class="stuffbox">
-				<h3><label for="sidebar_name"><?php _e('Select the sidebars available for substitution','custom-sidebars'); ?></label></h3>
+				<h3><label for="sidebar_name"><?php _e('Select replaceable sidebars','custom-sidebars'); ?></label></h3>
 				<div class="inside">
-					<select name="modifiable[]" multiple="multiple" size="5" style="height:auto;">
+					<select name="modifiable[]" multiple="multiple" size="20" style="height:auto;" id="sidebarselect">
 					<?php foreach($themesidebars as $key => $ts):?>
 						<option value="<?php echo $key;?>" <?php echo (!empty($modifiable) && array_search($key, $modifiable)!== FALSE) ? 'selected="selected"' : ''; ?>>
 						<?php echo $ts['name'];?>
@@ -82,8 +82,8 @@
 			});
 		});
 	</script>
-	<h2><?php _e('All the Custom Sidebars','custom-sidebars'); ?></h2>
-	<p><?php _e('If a sidebar is deleted and is currently on use, the posts and pages which uses it will show the default sidebar instead.','custom-sidebars'); ?></p>
+	<h2><?php _e('All Custom Sidebars','custom-sidebars'); ?></h2>
+	<p><?php _e('If a sidebar is deleted and is currently in use, the posts and pages which use it will show the default sidebar instead.','custom-sidebars'); ?></p>
 	<table class="widefat fixed" cellspacing="0">
 	
 	<thead>
@@ -109,7 +109,7 @@
 		</tr>
 		<?php endforeach;else:?>
 		<tr id="cs-1" class="alternate">
-			<td colspan="3"><?php _e('There are no custom sidebars available. You can create a new one using the left form.','custom-sidebars'); ?></td>
+			<td colspan="3"><?php _e('There are currently no custom sidebars. You can create a new one using the "New Sidebar" form at the top right of this page.','custom-sidebars'); ?></td>
 		</tr>
 		<?php endif;?>
 		
@@ -131,9 +131,9 @@
 	<form action="themes.php?page=ThemeistsCustomSidebars" method="post">
 	<input type="hidden" name="reset-n" value="<?php echo $deletenonce; ?>" />
 	<h2><?php _e('Reset Sidebars','custom-sidebars'); ?></h2>
-	<p><?php _e('Click on the button below to delete all the Custom Sidebars data from the database. Keep in mind that once the button is clicked you will have to create new sidebars and customize them to restore your current sidebars configuration.</p><p>If you are going to uninstall the plugin permanently, you should use this button before, so there will be no track about the plugin left in the database.','custom-sidebars'); ?></p>
+	<p><?php _e('Click on the button below to delete all the Custom Sidebars data from the database. Keep in mind that once the button is clicked you will have to create new sidebars and customize them to restore your current sidebars configuration.</p><p>If you are going to uninstall this plugin, you should do this beforehand.','custom-sidebars'); ?></p>
 	
-	<p class="submit"><input onclick="return confirm('<?php _e('Are you sure to reset the sidebars?','custom-sidebars'); ?>')"type="submit" class="button-primary" name="reset-sidebars" value="<?php _e('Reset Sidebars','custom-sidebars'); ?>" /></p>
+	<p class="submit"><input onclick="return confirm('<?php _e('Are you sure you want to delete all your custom sidebars?','custom-sidebars'); ?>')"type="submit" class="button-secondary" name="reset-sidebars" value="<?php _e('Delete All Custom Sidebars','custom-sidebars'); ?>" /></p>
 	
 	</form>
 </div>

@@ -192,8 +192,15 @@ border: 1px solid #C00;
     padding:0;
 }
 
-#ThemeistsCustomSidebarspage #col-right{
-    width: 62%;
+#ThemeistsCustomSidebarspage #col-right,
+#ThemeistsCustomSidebarspage #col-left
+{
+    width: 45%;
+}
+
+#sidebarselect
+{
+    width: 100%;
 }
 
 .widgets_access .widget-liquid-right{
